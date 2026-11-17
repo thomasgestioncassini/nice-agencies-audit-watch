@@ -1,13 +1,13 @@
 {
  "note": "Empreintes SHA-256 épinglées. Toute modification doit être motivée dans CHANGES.md.",
- "commit": "47566f3787664ab3060defb9c01a647fdfdfb264",
+ "commit": "1b9c133dcb7f99a672533beaf0af2d864f39a13f",
  "files": {
   "config/mandate-v1.md": "82e0fec40442f9e2ab530af39492ad0a83e777c1e424867598daa9a65e8089c8",
   "config/ai-models.json": "f142683d0b4da8ef583288a845e4dbb9fc100af0305a5c676ac2228872a98ca9",
   "config/audit-policy.json": "afdf5bbcb43fe784249004b66a231dfba05d46874fcfdd8c774f1f5c9033428c",
   "config/methodology-v5.json": "e8c5b4aeba32954d480916e3cbad1b25520c9da9291e9a9b203d438dbf830708",
   "config/networks.json": "79044473dbb1275a2fa202f8555e8c6523466006d0f8e65aa58fa4cf76114a50",
-  ".github/workflows/archive.yml": "e70f921586f057b9ddd7c3b301bc66b9d7511227cf3576cc353b430e2cba59fc",
-  ".github/workflows/audit-ia.yml": "06ccd876a677d0f49c1dac8289042cd4ae95de4cd31d9de63131653c93e5bba2"
+  ".github/workflows/archive.yml": "018dac622ebcb705ae11324d8498a9c859b7fd6b5bad1390d69980f6c6669b83",
+  ".github/workflows/audit-ia.yml": "657b093f1470aef3b2be45579837a07623d7d26c98e762d5312f38e0e94153de"
  }
 }
