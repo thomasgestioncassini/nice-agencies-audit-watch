@@ -1,0 +1,44 @@
+name: surveillance
+
+# Chaque jour à 13:17 UTC, plus déclenchement manuel. Lecture seule du dépôt surveillé.
+on:
+  schedule:
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write     # registre des relevés et rapports vus (state/)
+  issues: write       # alertes publiques
+
+concurrency:
+  group: surveillance
+  cancel-in-progress: false
+
+jobs:
+  surveiller:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tests
+        run: python -m unittest -v
+      - name: Contrôle
+        id: controle
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python watch.py; echo "code=$?" >> "$GITHUB_OUTPUT"
+          cat state/dernier-controle.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Enregistrement du registre
+        run: |
+          git config user.name "nice-agencies-audit-watch[bot]"
+          git config user.email "watch-bot@users.noreply.github.com"
+          git add state
+          git diff --cached --quiet || { git commit -m "Contrôle du $(date -u +%F) (exécution ${GITHUB_RUN_ID})" && git push; }
+      - name: Échec si anomalie (GitHub prévient alors le propriétaire par e-mail)
+        if: steps.controle.outputs.code != '0'
+        run: exit 1
